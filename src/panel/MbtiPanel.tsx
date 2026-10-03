@@ -72,10 +72,11 @@ function AxisControl({ axis, value, onMove }: { axis: AxisContent; value: number
         }}
       />
       <div className="axis__pct" aria-hidden="true">
-        <span className={value <= 0.5 ? 'is-dominant' : ''}>
+        {/* Keyed so width changes remount the text instead of shifting it. */}
+        <span key={`l${leftPct}`} className={value <= 0.5 ? 'is-dominant' : ''}>
           {axis.left.letter} {leftPct} %
         </span>
-        <span className={value > 0.5 ? 'is-dominant' : ''}>
+        <span key={`r${rightPct}`} className={value > 0.5 ? 'is-dominant' : ''}>
           {rightPct} % {axis.right.letter}
         </span>
       </div>
@@ -93,11 +94,40 @@ function AxisControl({ axis, value, onMove }: { axis: AxisContent; value: number
 
 const randomAxes = (): Axes => ({ ei: Math.random(), sn: Math.random(), tf: Math.random(), jp: Math.random() });
 
+const PANEL_FONT = '420 14px Recursive';
+type FontState = 'pending' | 'ready' | 'fallback';
+
+// Keeps the panel hidden until Recursive is usable, else locks it on the system font: no swap reflow.
+function usePanelFont(): FontState {
+  const [state, setState] = useState<FontState>(() => (document.fonts.check(PANEL_FONT) ? 'ready' : 'pending'));
+  useEffect(() => {
+    if (state !== 'pending') return;
+    let done = false;
+    const settle = (s: FontState) => {
+      if (!done) {
+        done = true;
+        setState(s);
+      }
+    };
+    const timer = setTimeout(() => settle('fallback'), 1500);
+    document.fonts.load(PANEL_FONT).then(
+      (faces) => settle(faces.length ? 'ready' : 'fallback'),
+      () => settle('fallback'),
+    );
+    return () => {
+      done = true;
+      clearTimeout(timer);
+    };
+  }, [state]);
+  return state;
+}
+
 export function MbtiPanel() {
   const { axes, theme } = useAppState();
   const [status, setStatus] = useState('');
   const [quizOpen, setQuizOpen] = useState(false);
   const [moving, setMoving] = useState<AxisContent | null>(null);
+  const font = usePanelFont();
   const movingTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
   useEffect(() => () => clearTimeout(movingTimer.current), []);
   const code = typeCode(axes);
@@ -123,26 +153,33 @@ export function MbtiPanel() {
   });
 
   return (
-    <aside className="panel" aria-label="Réglages de personnalité">
+    <aside className="panel" data-font={font} aria-label="Réglages de personnalité">
       <div className="panel__type" data-testid="type-code">
         <div className="panel__letters" aria-label={`Type ${code}`}>
           {AXES.map((a) => {
             const v = axes[a.key];
             const pole = v <= 0.5 ? a.left : a.right;
+            const share = Math.max(pct(v), 100 - pct(v));
             return (
               <span key={a.key} className="panel__letter">
-                <span className="panel__letter-char">{pole.letter}</span>
-                <span className="panel__letter-pct">{Math.max(pct(v), 100 - pct(v))} %</span>
+                <span key={`c${pole.letter}`} className="panel__letter-char">
+                  {pole.letter}
+                </span>
+                <span key={`p${share}`} className="panel__letter-pct">
+                  {share} %
+                </span>
               </span>
             );
           })}
         </div>
-        <p className="panel__portrait" aria-live="polite" data-testid="portrait">
-          <b>
-            {code} — {profile.nickname}.
-          </b>{' '}
-          {profile.description}
-        </p>
+        <div className="panel__portrait" aria-live="polite">
+          <p key={code} data-testid="portrait">
+            <b>
+              {code} — {profile.nickname}.
+            </b>{' '}
+            {profile.description}
+          </p>
+        </div>
       </div>
 
       <div className="panel__actions">
