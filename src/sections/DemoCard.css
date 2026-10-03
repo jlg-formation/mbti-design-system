@@ -1,0 +1,104 @@
+.demo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-6);
+  color: var(--color-text);
+  background: var(--color-surface);
+  backdrop-filter: blur(var(--blur)) saturate(calc(1 + var(--pattern-opacity)));
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card-a) var(--radius-card-b);
+  box-shadow: var(--shadow-md);
+  transform: translate(calc(var(--seed-2) * var(--chaos-shift)), calc(var(--seed) * var(--chaos-shift)))
+    rotate(calc(var(--seed) * var(--chaos-rotate)));
+}
+
+/* Open popovers must float above the neighbouring cards. */
+.demo-card:focus-within {
+  z-index: 5;
+}
+
+.demo-card--wide {
+  grid-column: 1 / -1;
+}
+
+.demo-card__header {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.demo-card__index {
+  flex: none;
+  display: grid;
+  place-items: center;
+  min-width: 2.2em;
+  height: 2.2em;
+  padding: 0 0.3em;
+  color: var(--color-on-accent);
+  background: var(--gradient-accent);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-wght-strong);
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+  box-shadow: var(--glow);
+}
+
+.demo-card__title {
+  margin: 0;
+  font-size: calc(var(--font-size-heading) * 0.78);
+  font-weight: var(--font-wght-strong);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: 1.2;
+}
+
+.demo-card__description {
+  margin: var(--space-1) 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.9em;
+}
+
+.demo-card__live {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.demo-card__states {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  border-top: var(--border-width) dashed var(--color-border);
+}
+
+.demo-card__states-title {
+  grid-column: 1 / -1;
+  margin: 0;
+  font-size: 0.75em;
+  font-weight: var(--font-wght-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+}
+
+.demo-state {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.demo-state__label {
+  font-size: 0.75em;
+  color: var(--color-text-muted);
+}
+
+.demo-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
