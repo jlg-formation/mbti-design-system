@@ -1,0 +1,64 @@
+.ui-tabs__list {
+  display: flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--color-surface-2);
+  border-radius: var(--radius-a) var(--radius-b);
+}
+
+.ui-tabs__tab {
+  flex: 1;
+  min-height: calc(var(--control-height) * 0.85);
+  padding: 0 var(--space-3);
+  border: 0;
+  border-radius: calc(var(--radius-a) * 0.8) calc(var(--radius-b) * 0.8);
+  color: var(--color-text-muted);
+  background: transparent;
+  font: inherit;
+  letter-spacing: inherit;
+  cursor: pointer;
+  transition: transform var(--duration) var(--ease);
+}
+
+.ui-tabs__tab:hover:not(:disabled):not(.is-selected) {
+  color: var(--color-text);
+  transform: translateY(calc(var(--hover-lift) * -0.5));
+}
+
+.ui-tabs__tab.is-selected {
+  color: var(--color-accent-text);
+  background: var(--color-surface-solid);
+  font-weight: var(--font-wght-strong);
+  box-shadow: var(--shadow-sm);
+  animation: ui-tab-in var(--duration-slow) var(--ease);
+}
+
+@keyframes ui-tab-in {
+  from {
+    transform: scale(0.92);
+  }
+}
+
+.ui-tabs__tab:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.ui-tabs__tab:focus-visible,
+.ui-tabs__panel:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.ui-tabs__panel {
+  padding: var(--space-3) var(--space-1) 0;
+  border-radius: var(--radius-sm);
+  animation: ui-panel-in var(--duration-slow) var(--ease);
+}
+
+@keyframes ui-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}

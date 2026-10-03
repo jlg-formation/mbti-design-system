@@ -1,0 +1,87 @@
+.ui-select {
+  position: relative;
+}
+
+.ui-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  cursor: pointer;
+}
+
+.ui-select__placeholder {
+  color: var(--color-text-muted);
+}
+
+.ui-select__chevron {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  color: var(--color-accent-text);
+  transition: transform var(--duration) var(--ease);
+}
+
+.ui-select__trigger[aria-expanded='true'] .ui-select__chevron {
+  transform: rotate(180deg);
+}
+
+/* Shared floating panel (select list, date picker). */
+.ui-popover {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + var(--space-1));
+  left: 0;
+  color: var(--color-text);
+  background: var(--color-surface);
+  backdrop-filter: blur(var(--blur));
+  border: var(--border-width) solid var(--color-border);
+  border-radius: var(--radius-card-b) var(--radius-card-a);
+  box-shadow: var(--shadow-lg);
+  transform-origin: top left;
+  animation: ui-pop-in var(--duration-slow) var(--ease) both;
+}
+
+@keyframes ui-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+}
+
+.ui-select__list {
+  right: 0;
+  max-height: 240px;
+  margin: 0;
+  padding: var(--space-1);
+  overflow-y: auto;
+  list-style: none;
+}
+
+.ui-select__list:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.ui-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.ui-select__option.is-active {
+  background: var(--color-accent-soft);
+}
+
+.ui-select__option[aria-selected='true'] {
+  color: var(--color-accent-text);
+  font-weight: var(--font-wght-strong);
+}
+
+.ui-select__check {
+  width: 1em;
+  height: 1em;
+}

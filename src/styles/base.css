@@ -1,0 +1,84 @@
+:root {
+  --panel-width: 380px;
+  color-scheme: var(--color-scheme, light);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--color-bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--color-text);
+  background: var(--gradient-bg);
+  background-attachment: fixed;
+  font-family: 'Recursive', system-ui, sans-serif;
+  font-size: var(--font-size);
+  font-weight: var(--font-wght);
+  font-variation-settings:
+    'slnt' var(--font-slnt),
+    'CASL' var(--font-casl),
+    'MONO' var(--font-mono);
+  line-height: var(--line-height);
+  letter-spacing: var(--letter-spacing);
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-variation-settings: inherit;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.morph-caps {
+  display: inline-grid;
+}
+
+.morph-caps > span {
+  grid-area: 1 / 1;
+}
+
+.morph-caps__base {
+  opacity: calc(1 - var(--caps));
+}
+
+.morph-caps__upper {
+  text-transform: uppercase;
+  opacity: var(--caps);
+}
+
+/* Backup for anything not driven by the motion tokens. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+}

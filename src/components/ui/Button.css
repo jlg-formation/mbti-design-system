@@ -1,0 +1,78 @@
+.ui-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--control-height);
+  padding: 0 var(--control-px);
+  border: var(--border-width) solid transparent;
+  border-radius: var(--radius-a) var(--radius-b);
+  font: inherit;
+  font-weight: var(--font-wght-strong);
+  letter-spacing: var(--letter-spacing);
+  cursor: pointer;
+  transition:
+    transform var(--duration) var(--ease),
+    opacity var(--duration) var(--ease);
+}
+
+/* Hover tint is an overlay so only opacity animates: token changes stay instant while dragging. */
+.ui-btn::after {
+  content: '';
+  position: absolute;
+  inset: calc(var(--border-width) * -1);
+  z-index: -1;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  transition: opacity var(--duration) var(--ease);
+  pointer-events: none;
+}
+
+.ui-btn:hover:not(:disabled),
+.ui-btn.is-hover {
+  transform: translateY(calc(var(--hover-lift) * -1)) scale(var(--hover-scale));
+}
+
+.ui-btn:hover:not(:disabled)::after,
+.ui-btn.is-hover::after {
+  opacity: 0.08;
+}
+
+.ui-btn:active:not(:disabled) {
+  transform: scale(var(--press-scale));
+}
+
+.ui-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.ui-btn--primary {
+  color: var(--color-on-accent);
+  background: var(--gradient-accent);
+  box-shadow: var(--shadow-sm), var(--glow);
+}
+
+/* --color-text moves the accent away from the label color in both themes, so contrast only improves. */
+.ui-btn--primary::after {
+  background: var(--color-text);
+}
+
+.ui-btn--secondary {
+  color: var(--color-accent-text);
+  background: var(--color-surface-solid);
+  border-color: var(--color-border-strong);
+  box-shadow: var(--shadow-sm);
+}
+
+.ui-btn--ghost {
+  color: var(--color-accent-text);
+  background: transparent;
+}
+
+.ui-btn--ghost::after {
+  background: var(--color-accent-text);
+}

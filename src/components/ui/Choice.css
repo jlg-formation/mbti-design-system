@@ -1,0 +1,111 @@
+.ui-choice {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: calc(var(--control-height) * 0.8);
+  cursor: pointer;
+  user-select: none;
+}
+
+.ui-choice.is-disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.ui-choice__input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: 0;
+  pointer-events: none;
+}
+
+.ui-choice__box {
+  --size: calc(1.15em * var(--scale));
+  position: relative;
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: var(--size);
+  height: var(--size);
+  color: var(--color-on-accent);
+  background: var(--color-surface-solid);
+  border: calc(var(--border-width) + 0.5px) solid var(--color-border-strong);
+  transition: transform var(--duration) var(--ease);
+}
+
+.ui-choice__box--check {
+  border-radius: var(--radius-sm);
+}
+
+.ui-choice__box--radio {
+  border-radius: 50%;
+}
+
+.ui-choice__box--radio::after {
+  content: '';
+  width: 45%;
+  height: 45%;
+  border-radius: 50%;
+  background: var(--color-on-accent);
+  transform: scale(0);
+  transition: transform var(--duration) var(--ease);
+}
+
+.ui-choice__mark {
+  width: 80%;
+  height: 80%;
+  transform: scale(0);
+  transition: transform var(--duration) var(--ease);
+}
+
+.ui-choice:hover:not(.is-disabled) .ui-choice__box,
+.ui-choice.is-hover .ui-choice__box {
+  border-color: var(--color-accent-text);
+  transform: scale(var(--hover-scale));
+}
+
+.ui-choice__input:checked + .ui-choice__box {
+  background: var(--gradient-accent);
+  border-color: var(--color-accent);
+  box-shadow: var(--glow);
+}
+
+.ui-choice__input:checked + .ui-choice__box .ui-choice__mark,
+.ui-choice__input:checked + .ui-choice__box--radio::after {
+  transform: scale(1);
+}
+
+.ui-choice__input:focus-visible + .ui-choice__box,
+.ui-choice.is-focus .ui-choice__box {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.ui-radio-group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.ui-radio-group__legend {
+  padding: 0;
+  margin-bottom: var(--space-2);
+  font-weight: var(--font-wght-strong);
+  font-size: 0.92em;
+}
+
+.ui-radio-group__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.ui-radio-group--horizontal .ui-radio-group__options {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-4);
+}
