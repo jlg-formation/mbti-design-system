@@ -24,7 +24,7 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: `npm run build && npx vite preview --port ${PORT} --strictPort --base /`,
+    command: `bun run build && bunx vite preview --port ${PORT} --strictPort --base /`,
     url: `http://localhost:${PORT}/`,
     reuseExistingServer: !process.env.CI,
     timeout: 180_000,
