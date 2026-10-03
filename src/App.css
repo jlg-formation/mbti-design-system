@@ -1,0 +1,181 @@
+.page {
+  margin-right: var(--panel-width);
+  padding: calc(var(--space-8) + 8px) clamp(24px, 4vw, 64px) var(--space-8);
+}
+
+.intro {
+  max-width: 760px;
+  margin-bottom: calc(var(--section-gap) * 1.5);
+}
+
+.intro__kicker {
+  margin: 0 0 var(--space-2);
+  color: var(--color-accent-text);
+  font-weight: var(--font-wght-strong);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+
+.intro__title {
+  margin: 0 0 var(--space-4);
+  font-size: calc(var(--font-size-heading) * 1.7);
+  font-weight: var(--font-wght-strong);
+  letter-spacing: var(--letter-spacing-heading);
+  line-height: 1.08;
+  color: var(--color-text);
+}
+
+/* Gradient text only where its colors have been contrast-checked against the page. */
+@supports (background-clip: text) {
+  .intro__title .morph-caps > span {
+    background: linear-gradient(90deg, var(--color-accent-text), var(--color-accent-text-2));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.intro__text {
+  margin: 0 0 var(--space-3);
+  font-size: 1.08em;
+}
+
+.intro__note {
+  display: inline-block;
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  color: var(--color-text-muted);
+  background: var(--color-accent-soft);
+  border-radius: var(--radius-sm);
+  font-size: 0.88em;
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: var(--section-gap);
+  align-items: start;
+}
+
+.demo-text {
+  margin: 0;
+}
+
+.page__footer {
+  margin-top: var(--space-8);
+  color: var(--color-text-muted);
+  font-size: 0.85em;
+}
+
+.page__footer p {
+  margin: 0;
+}
+
+/* N side: decorative blobs and a dot pattern fade in behind the glass. */
+.decor {
+  position: fixed;
+  inset: 0 var(--panel-width) 0 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: var(--decor-opacity);
+}
+
+.decor__blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+}
+
+.decor__blob--1 {
+  top: -10%;
+  left: 10%;
+  width: 46vw;
+  height: 46vw;
+  background: var(--color-decor-1);
+}
+
+.decor__blob--2 {
+  bottom: -18%;
+  right: -6%;
+  width: 40vw;
+  height: 40vw;
+  background: var(--color-decor-2);
+}
+
+.decor__blob--3 {
+  top: 40%;
+  left: -12%;
+  width: 26vw;
+  height: 26vw;
+  background: var(--color-decor-2);
+  border-radius: 40% 60% 55% 45%;
+}
+
+.decor__pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--color-border-strong) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+  opacity: var(--pattern-opacity);
+}
+
+/* J side: graph-paper grid. N and F sides: paper grain. */
+.texture {
+  position: fixed;
+  inset: 0 var(--panel-width) 0 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.texture__grid,
+.texture__grain {
+  position: absolute;
+  inset: 0;
+}
+
+.texture__grid {
+  background-image:
+    linear-gradient(var(--color-border-strong) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border-strong) 1px, transparent 1px);
+  background-size: var(--space-8) var(--space-8);
+  opacity: var(--grid-opacity);
+}
+
+.texture__grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: var(--grain-opacity);
+}
+
+.small-screen {
+  display: none;
+}
+
+@media (max-width: 1023px) {
+  .app,
+  .decor,
+  .texture {
+    display: none;
+  }
+
+  .small-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 12px;
+    min-height: 100vh;
+    padding: 32px;
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .small-screen p {
+    margin: 0;
+  }
+
+  .small-screen__title {
+    font-weight: 800;
+    font-size: 26px;
+  }
+}
