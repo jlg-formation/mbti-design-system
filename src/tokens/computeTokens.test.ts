@@ -108,6 +108,16 @@ describe('computeTokens', () => {
       }
     }
   });
+
+  it('keeps the caps cross-fade short so headings never show two half-visible layers', () => {
+    let mixed = 0;
+    for (let i = 0; i <= 100; i++) {
+      const caps = Number(computeTokens({ ...NEUTRAL_AXES, tf: i / 100 }, 'light').type.caps);
+      if (caps > 0.1 && caps < 0.9) mixed++;
+    }
+    expect(mixed).toBeLessThanOrEqual(2);
+    expect(Number(computeTokens({ ei: 0.19, sn: 0.07, tf: 0.27, jp: 0.24 }, 'light').type.caps)).toBeGreaterThan(0.9);
+  });
 });
 
 describe('WCAG AA contrast', () => {

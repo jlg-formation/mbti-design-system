@@ -146,8 +146,10 @@ export function computeTokens(axes: Axes, theme: Theme, options: TokenOptions = 
 
   // ---------- Typography (Recursive variable font) ----------
   const wght = pick(520, 900, 300, ei);
-  // T switches headings to spaced capitals (cross-faded), fully on from ~80 % T.
-  const caps = smoothstep((T - 0.3) / 0.5);
+  // T switches headings to spaced capitals, fully on from ~80 % T.
+  const capsRamp = smoothstep((T - 0.3) / 0.5);
+  // Overlaid lower/upper layers are unreadable when mixed: keep the cross-fade very short.
+  const caps = smoothstep((capsRamp - 0.45) / 0.1);
   const type: Tokens['type'] = {
     'font-wght': num(wght, 1),
     'font-wght-strong': num(Math.min(1000, wght + pick(180, 100, 220, ei)), 1),
@@ -158,7 +160,7 @@ export function computeTokens(axes: Axes, theme: Theme, options: TokenOptions = 
     'font-size-heading': px(pick(22, 40, 17, ei)),
     'line-height': num(lerp(1.42, 1.62, 0.5 * f + 0.5 * (1 - e))),
     'letter-spacing': `${round(0.004 + 0.035 * P - 0.006 * E + 0.012 * I, 4)}em`,
-    'letter-spacing-heading': `${round(-0.015 + 0.065 * caps + 0.03 * P - 0.015 * F, 4)}em`,
+    'letter-spacing-heading': `${round(-0.015 + 0.065 * capsRamp + 0.03 * P - 0.015 * F, 4)}em`,
     caps: num(caps),
   };
 
