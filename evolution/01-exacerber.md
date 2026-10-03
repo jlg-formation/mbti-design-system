@@ -1,0 +1,1 @@
+OK, j'ai testé le site. Je trouve que quand on bouge les curseurs, il n'y a pas grand-chose qui change. Je pense qu'il faudrait essayer de faire des changements plus marqués, des choses qui impressionnent. Donc, il faut qu'on réfléchisse ensemble à comment on peut faire ça. 
