@@ -1,4 +1,4 @@
-# Morphing UI — Un design system qui change selon la personnalité
+# MBTI Design System — Un design system qui change selon la personnalité
 
 ## Contexte
 

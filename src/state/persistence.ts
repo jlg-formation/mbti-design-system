@@ -7,7 +7,7 @@ export interface AppState {
 }
 
 const PARAM: Record<keyof Axes, string> = { ei: 'ei', sn: 'sn', tf: 'tf', jp: 'jp' };
-export const STORAGE_KEY = 'morphing-ui:state';
+export const STORAGE_KEY = 'mbti-design-system:state';
 
 const parsePercent = (raw: string | null | undefined): number | undefined => {
   if (raw == null || raw.trim() === '') return undefined;

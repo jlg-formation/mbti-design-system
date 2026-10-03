@@ -121,7 +121,7 @@ test('export copies and downloads CSS and JSON', async ({ page }) => {
     page.waitForEvent('download'),
     exportBlock.getByRole('button', { name: 'Télécharger' }).first().click(),
   ]);
-  expect(cssDownload.suggestedFilename()).toMatch(/^morphing-ui-[ei][sn][tf][jp]-(light|dark)\.css$/);
+  expect(cssDownload.suggestedFilename()).toMatch(/^mbti-design-system-[ei][sn][tf][jp]-(light|dark)\.css$/);
 
   const [jsonDownload] = await Promise.all([
     page.waitForEvent('download'),

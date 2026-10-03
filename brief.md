@@ -1,4 +1,4 @@
-# Morphing UI — Brief
+# MBTI Design System — Brief
 
 ## Concept
 

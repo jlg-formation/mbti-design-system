@@ -20,7 +20,7 @@ export function App() {
       <div className="app">
         <main className="page">
           <header className="intro">
-            <p className="intro__kicker">Morphing UI</p>
+            <p className="intro__kicker">MBTI Design System</p>
             <h1 className="intro__title">
               <MorphCaps>Un design system qui change de personnalité</MorphCaps>
             </h1>
@@ -49,7 +49,7 @@ export function App() {
       </div>
 
       <div className="small-screen" role="alert">
-        <p className="small-screen__title">Morphing UI</p>
+        <p className="small-screen__title">MBTI Design System</p>
         <p>Ce site est pensé pour un écran d’ordinateur. Ouvrez-le sur un écran plus large pour jouer avec les curseurs.</p>
       </div>
     </>

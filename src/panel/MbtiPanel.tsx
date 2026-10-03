@@ -145,9 +145,9 @@ export function MbtiPanel() {
   };
 
   const exportTokens = () => computeTokens(axes, theme);
-  const fileBase = `morphing-ui-${code.toLowerCase()}-${theme}`;
+  const fileBase = `mbti-design-system-${code.toLowerCase()}-${theme}`;
   const meta = () => ({
-    name: `Morphing UI — ${code}`,
+    name: `MBTI Design System — ${code}`,
     theme,
     axes: { ei: pct(axes.ei), sn: pct(axes.sn), tf: pct(axes.tf), jp: pct(axes.jp) },
   });
